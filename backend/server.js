@@ -19,6 +19,11 @@ app.use("/api/products", productRouter);
 app.use("/api/product", productRouter);
 
 app.use("/api/orders", orderRouter);
+app.use("/api/order", orderRouter);
+
+app.get("/api/config/paypal", (req, res) => {
+  res.send(process.env.PAYPAL_CLIENT_ID_BOTANICA_SB || "sb");
+});
 
 app.get("/", (req, res) => {
   res.send("server is ready");
