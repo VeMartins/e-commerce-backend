@@ -4,8 +4,17 @@ import Order from "../models/orderModel.js";
 import { isAuth } from "../utils.js";
 
 const orderRouter = express.Router();
+// api to get list of orders
+orderRouter.get(
+  "/myorders",
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const orders = await Order.find({ user: req.user._id });
+    res.send(orders);
+  })
+);
 
-// api for /api/orders
+// api for /api/ --> creates order
 
 orderRouter.post(
   "/",
@@ -32,7 +41,7 @@ orderRouter.post(
     }
   })
 );
-// /api/orders/:id
+// /api/orders/:id --> gets single order
 orderRouter.get(
   "/:id",
   isAuth,
@@ -48,6 +57,7 @@ orderRouter.get(
   })
 );
 
+// updates order payment --> when paid
 orderRouter.put(
   "/:id/pay",
   isAuth,
