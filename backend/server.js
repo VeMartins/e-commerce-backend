@@ -1,9 +1,11 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import path from "path";
 import productRouter from "./routers/productRouter.js";
 import userRouter from "./routers/userRouter.js";
 import orderRouter from "./routers/orderRouter.js";
+import uploadRouter from "./routers/uploadRouter.js";
 
 dotenv.config();
 
@@ -11,6 +13,8 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use("/api/uploads", uploadRouter);
 
 app.use("/api/users", userRouter);
 
@@ -24,6 +28,10 @@ app.use("/api/order", orderRouter);
 app.get("/api/config/paypal", (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID_BOTANICA_SB || "sb");
 });
+
+// to be able to display the uploaded images
+const _dirname = path.resolve();
+app.use("/uploads", express.static(path.join(_dirname, "/uploads")));
 
 app.get("/", (req, res) => {
   res.send("server is ready");

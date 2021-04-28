@@ -27,6 +27,7 @@ const products = [
     price: 1799,
     sale: 0,
     amount: 1,
+    featured: false,
   },
   {
     title: `mirror-effect leaves pillow `,
@@ -41,6 +42,7 @@ const products = [
     price: 1699,
     sale: 1499,
     amount: 1,
+    featured: false,
   },
   {
     title: `black sand bottle earrings `,
@@ -70,6 +72,7 @@ const products = [
     price: 599,
     sale: 0,
     amount: 1,
+    featured: false,
   },
   {
     title: `cotton mask `,
@@ -114,6 +117,7 @@ const products = [
     price: 600,
     sale: 0,
     amount: 1,
+    featured: false,
   },
   {
     title: `pack of 3  produce bags `,
@@ -157,6 +161,7 @@ const products = [
     price: 1300,
     sale: 1200,
     amount: 1,
+    featured: false,
   },
   {
     title: `reversible tote bag`,
@@ -171,6 +176,7 @@ const products = [
     price: 1800,
     sale: 1699,
     amount: 1,
+    featured: false,
   },
 ];
 
