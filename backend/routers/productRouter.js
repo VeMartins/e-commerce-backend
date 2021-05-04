@@ -47,9 +47,9 @@ productRouter.post(
   expressAsyncHandler(async (req, res) => {
     const product = new Product({
       title: "sample name" + Date.now(),
-      img: "./images/sacoPesca.jpg",
-      thumbnail1: "./images/sacoPesca.jpg",
-      thumbnail2: "./images/produceBags.png",
+      img: "/uploads/product_image_not_available.png",
+      thumbnail1: "/uploads/product_image_not_available.png",
+      thumbnail2: "/uploads/Botanica.jpg",
       detail: "sample detail",
       category: "sample category",
       sub_category: "sample sub_category",

@@ -5,6 +5,7 @@ import { isAdmin, isAuth } from "../utils.js";
 
 const orderRouter = express.Router();
 
+//get all orders for admin
 orderRouter.get(
   "/",
   isAuth,
@@ -14,7 +15,7 @@ orderRouter.get(
     res.send(orders);
   })
 );
-// api to get list of orders for users
+//  get list of orders for users
 orderRouter.get(
   "/myorders",
   isAuth,
@@ -91,4 +92,38 @@ orderRouter.put(
   })
 );
 
+//updating delivery
+orderRouter.put(
+  "/:id/deliver",
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id);
+    if (order) {
+      order.isDelivered = true;
+      order.deliveredAt = Date.now();
+
+      const updatedOrder = await order.save();
+      res
+        .status(200)
+        .send({ message: "Order delivered!", order: updatedOrder });
+    } else {
+      res.status(404).send({ message: "Order to be delivered Not Found" });
+    }
+  })
+);
+orderRouter.delete(
+  "/:id",
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id);
+    if (order) {
+      const deletedOrder = await order.remove();
+      res.send({ message: "Order Deleted", order: deletedOrder });
+    } else {
+      res.status(404).send({ message: "Order to be deleted Not Found" });
+    }
+  })
+);
 export default orderRouter;
