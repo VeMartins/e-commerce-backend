@@ -6,6 +6,7 @@ import productRouter from "./routers/productRouter.js";
 import userRouter from "./routers/userRouter.js";
 import orderRouter from "./routers/orderRouter.js";
 import uploadRouter from "./routers/uploadRouter.js";
+import mailRouter from "./routers/mailRouter.js";
 
 dotenv.config();
 
@@ -13,6 +14,8 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use("/api/contact", mailRouter);
 
 app.use("/api/uploads", uploadRouter);
 
@@ -39,7 +42,7 @@ app.get("/", (req, res) => {
 
 //error handling
 app.use((err, req, res, next) => {
-  res.status(500).send({ message: err.message });
+  res.status(404).send({ message: err.message });
 });
 
 const port = process.env.PORT || 5000;
